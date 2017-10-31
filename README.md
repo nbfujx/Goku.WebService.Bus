@@ -58,3 +58,6 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 </goku>
 
 ```
+
+# 配置说明
+待续
