@@ -18,6 +18,8 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 | 存储过程查询 |SelectProc     |  
 
 # xml格式
+
+入参：
 ```xml
 <goku> 
   <header> 
@@ -46,3 +48,13 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 
 ```
 
+出参：
+```xml
+<goku>
+  <body>
+    <ret_info>成功</ret_info>
+    <ret_code>0</ret_code>
+  </body>
+</goku>
+
+```
