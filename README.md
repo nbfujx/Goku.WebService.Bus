@@ -7,15 +7,15 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 # 功能
 支持下列操作
 
-| 操作类型        | 交易方法         | 
+| 操作类型|交易方法| 
 | ------------- |:-------------:| 
-|新增      |insert|
-| 修改     |update      |  
-| 新增或者修改 |insertOrUpdate    |  
-|删除 |delete    |  
-| 查询单个|SelectOne     |  
-| 查询列表 |SelectList      |  
-| 存储过程查询 |SelectProc     |  
+|新增|insert|
+|修改|update|  
+|新增或者修改|insertOrUpdate|  
+|删除|delete|  
+|查询单个|SelectOne|  
+|查询列表|SelectList|  
+|存储过程处理|SelectProc|  
 
 # xml格式
 
