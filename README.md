@@ -9,7 +9,7 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 
 | 操作类型        | 交易方法         | 
 | ------------- |:-------------:| 
-|新增     |insert |
+|新增      |insert|
 | 修改     |update      |  
 | 新增或者修改 |insertOrUpdate    |  
 |删除 |delete    |  
