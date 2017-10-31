@@ -18,8 +18,8 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 |新增或者修改|insertOrUpdate|可批量|  
 |删除|delete|可批量|  
 |查询单个|SelectOne|  
-|查询列表|SelectList|  
-|存储过程处理|SelectProc|  
+|查询列表|SelectList|支持分页，需要入参带分页标志参数|  
+|存储过程处理|SelectProc|支持分页，需要入带待分页标志参数|  
 
 # xml格式
 
