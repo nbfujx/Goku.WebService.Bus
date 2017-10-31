@@ -4,6 +4,7 @@ import com.alibaba.druid.support.json.JSONUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.goku.webservice.controller.BusController;
+import com.goku.webservice.service.checkService;
 import com.goku.webservice.service.commService;
 import com.goku.webservice.util.RequestUtil.RequestInfo;
 import com.goku.webservice.util.RequestUtil.RequestUtil;
@@ -29,26 +30,32 @@ public class BusControllerImpl implements BusController {
     @Autowired
     private commService commservice;
 
+    @Autowired
+    private checkService checkservice;
+
     @Override
     public String process(String para) {
         try {
             RequestInfo requestInfo= RequestUtil.Serialize(XmlUtil.XMLToMap(para));
             ResponseInfo responseInfo=new ResponseInfo();
             Body body=new Body();
-            Object info=commservice.doProess(requestInfo.getHeader().getBs_code(),requestInfo.getHeader().getTran_no(),requestInfo.getBody().getData());
-            if(info.getClass().getName().equals("java.lang.String")){
+            String docheckString=checkservice.checkheader(requestInfo.getHeader());  //权限验证
+            if(docheckString!=null){
                 body.setRet_code("1");
-                body.setRet_info((String) info);
+                body.setRet_info(docheckString);
                 responseInfo.setBody(body);
-            }else if(info.getClass().getName().equals("java.lang.Integer")) {
-                body.setRet_code("0");
-                body.setRet_info("成功");
-                responseInfo.setBody(body);
-            }else {
-                body.setRet_code("0");
-                body.setRet_info("成功");
-                body.setData(info);
-                responseInfo.setBody(body);
+            }else{
+                Object info=commservice.doProess(requestInfo.getHeader().getBs_code(),requestInfo.getHeader().getTran_no(),requestInfo.getBody().getData());
+                if(info.getClass().getName().equals("java.lang.Integer")) {
+                    body.setRet_code("0");
+                    body.setRet_info("成功");
+                    responseInfo.setBody(body);
+                }else {
+                    body.setRet_code("0");
+                    body.setRet_info("成功");
+                    body.setData(info);
+                    responseInfo.setBody(body);
+                }
             }
             Map<String,Object> Response=new HashMap<>();
             Response.put("goku",responseInfo);

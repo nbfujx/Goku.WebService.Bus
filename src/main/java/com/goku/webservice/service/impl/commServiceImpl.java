@@ -41,6 +41,9 @@ public class commServiceImpl implements commService {
                 case "delete":
                      delete(method, Para);
                      return 1;
+                case "insertOrUpdate":
+                    insertOrUpdate(BsCode, Para);
+                    return 1;
                 default:
                     return "无相关操作类型";
 
@@ -52,24 +55,21 @@ public class commServiceImpl implements commService {
     }
 
 
-    public Map<String, String> SelectOne(String method,Object Para)
-    {
+
+
+    public Map<String, String> SelectOne(String method,Object Para) {
         return sqlSession.selectOne(method, Para);
     }
 
-    public List<Map<String, String>> SelectList(String method,Object Para)
-    {
+    public List<Map<String, String>> SelectList(String method,Object Para){
         return sqlSession.selectList(method, Para);
     }
 
-    public List<Map<String, String>> SelectProc(String method,Object Para)
-    {
+    public List<Map<String, String>> SelectProc(String method,Object Para){
         return sqlSession.selectList(method, Para);
     }
 
-
-    public void  insert(String method,Object Para)
-    {
+    public void  insert(String method,Object Para){
         if(Para.getClass().getName().equals("java.util.ArrayList"))
         {
             ArrayList list = (ArrayList) Para;
@@ -84,9 +84,7 @@ public class commServiceImpl implements commService {
         }
     }
 
-
-    public void  update(String method,Object Para)
-    {
+    public void  update(String method,Object Para){
         if(Para.getClass().getName().equals("java.util.ArrayList"))
         {
             ArrayList list = (ArrayList) Para;
@@ -102,9 +100,7 @@ public class commServiceImpl implements commService {
 
     }
 
-
-    public void delete(String method,Object Para)
-    {
+    public void delete(String method,Object Para){
         if(Para.getClass().getName().equals("java.util.ArrayList"))
         {
             ArrayList list = (ArrayList) Para;
@@ -119,7 +115,30 @@ public class commServiceImpl implements commService {
         }
     }
 
-
+    private void insertOrUpdate(String BsCode, Object Para) {
+        if(Para.getClass().getName().equals("java.util.ArrayList"))
+        {
+            ArrayList list = (ArrayList) Para;
+            for (int i = 0; i < list.size(); i++) {
+                HashMap hm = (HashMap) list.get(i);
+                int count=sqlSession.selectOne(BsCode.trim()+".SelectById", hm);
+                if(count>0) {
+                    sqlSession.update(BsCode.trim()+".update", hm);
+                }else{
+                    sqlSession.insert(BsCode.trim()+".insert", hm);
+                }
+            }
+        }
+        else
+        {
+            int count=sqlSession.selectOne(BsCode.trim()+".SelectById", Para);
+            if(count>0) {
+                sqlSession.update(BsCode.trim()+".update", Para);
+            }else{
+                sqlSession.insert(BsCode.trim()+".insert", Para);
+            }
+        }
+    }
 
 
 }

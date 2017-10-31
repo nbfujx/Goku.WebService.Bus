@@ -19,4 +19,13 @@
     <insert id="insert" parameterType="java.util.HashMap">
         insert into user_test(id, name) values(#{id}, #{name})
     </insert>
+    <update id="update" parameterType="java.util.HashMap">
+       update user_test set name=#{name} where id=#{id}
+    </update>
+    <delete id="delete" parameterType="java.util.HashMap">
+        delete from user_test  where id=#{id}
+    </delete>
+    <select id="SelectById" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        select count(1) from user_test  where id=#{id}
+    </select>
 </mapper>
