@@ -1,10 +1,6 @@
 # Goku.WebService.Bus
 基于 Spring +  Apache CXF +Mybatis 开发SOAP的 WebService 服务
 
-# 说明
-
-分页功能，权限验证待完善
-
 # 原理
 Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebService接口服务
 
@@ -116,5 +112,71 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 </goku>
 ```
 
-# 配置说明
-待续
+# 分页查询
+
+入参：
+```xml
+<goku> 
+  <header> 
+    <user_id>fjx</user_id>  
+    <password>1</password>  
+    <tran_no>SelectList</tran_no>  
+    <bs_code>sysUserMapper</bs_code>  
+     <!--是否分页-->
+    <is_pagination>Y</is_pagination>  
+     <!--当前页-->
+    <page_index>1</page_index>  
+     <!--单页数-->
+    <page_limit>10</page_limit> 
+  </header>  
+  <body> 
+    <data> 
+      <id>fjx</id> 
+    </data> 
+  </body> 
+</goku>
+```
+出参：
+```xml
+<goku>
+  <body>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <ret_code>0</ret_code>
+    <ret_info>成功!</ret_info>
+	  <!--当前页-->
+    <page_index>1</page_index>
+    <!--数据总数-->
+    <page_count>649</page_count>
+  </body>
+</goku>
+```
+
