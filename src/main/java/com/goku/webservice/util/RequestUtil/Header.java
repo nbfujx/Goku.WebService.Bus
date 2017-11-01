@@ -11,6 +11,33 @@ public class Header extends HashMap<String,Object> {
     private  String password;
     private  String tran_no;
     private  String bs_code;
+    private  String  is_pagination;
+    private  String  page_index;
+    private  String  page_limit;
+
+    public String getIs_pagination() {
+        return is_pagination;
+    }
+
+    public void setIs_pagination(String is_pagination) {
+        this.put("is_pagination", (this.is_pagination = is_pagination));
+    }
+
+    public String getPage_index() {
+        return page_index;
+    }
+
+    public void setPage_index(String page_index) {
+        this.put("page_index", (this.page_index = page_index));
+    }
+
+    public String getPage_limit() {
+        return page_limit;
+    }
+
+    public void setPage_limit(String page_limit) {
+        this.put("page_limit", (this.page_limit = page_limit));
+    }
 
     public String getBs_code() {
         return bs_code;

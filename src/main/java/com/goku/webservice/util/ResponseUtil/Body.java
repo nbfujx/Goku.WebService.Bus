@@ -9,7 +9,25 @@ public class Body extends HashMap<String,Object> {
 
     private String ret_code;
     private String ret_info;
+    private String page_index;
+    private String page_count;
     private Object data;
+
+    public String getPage_index() {
+        return page_index;
+    }
+
+    public void setPage_index(String page_index) {
+        this.put("page_index", (this.page_index = page_index));
+    }
+
+    public String getPage_count() {
+        return page_count;
+    }
+
+    public void setPage_count(String page_count) {
+        this.put("page_count", (this.page_count = page_count));
+    }
 
     public String getRet_code() {
         return ret_code;

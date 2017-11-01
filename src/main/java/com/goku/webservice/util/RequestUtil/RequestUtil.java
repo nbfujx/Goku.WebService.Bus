@@ -30,6 +30,15 @@ public class RequestUtil {
                 if (requestheader.containsKey("bs_code")) {
                     header.setBs_code((String) requestheader.get("bs_code"));
                 }
+                if (requestheader.containsKey("is_pagination")) {
+                    header.setIs_pagination((String) requestheader.get("is_pagination"));
+                }
+                if (requestheader.containsKey("page_index")) {
+                    header.setPage_index((String) requestheader.get("page_index"));
+                }
+                if (requestheader.containsKey("page_limit")) {
+                    header.setPage_limit((String) requestheader.get("page_limit"));
+                }
                 requestInfo.setHeader(header);
             }
             if (request.containsKey("body")) {

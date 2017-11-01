@@ -14,7 +14,6 @@
                 AND  male_ = #{male_,jdbcType=VARCHAR}
             </if>
         </where>
-        limit 0,20
     </select>
     <insert id="insert" parameterType="java.util.HashMap">
         insert into user_test(id, name) values(#{id}, #{name})

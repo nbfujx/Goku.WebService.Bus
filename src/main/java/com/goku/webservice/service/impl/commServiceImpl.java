@@ -45,7 +45,7 @@ public class commServiceImpl implements commService {
                     insertOrUpdate(BsCode, Para);
                     return 1;
                 default:
-                    return "无相关操作类型";
+                    return "error";
 
             }
        // }catch (Exception e)

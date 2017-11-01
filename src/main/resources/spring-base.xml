@@ -71,6 +71,12 @@
         <constructor-arg index="0" ref="sqlSessionFactory" />
     </bean>
 
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.goku.webservice.mapper"/>
+        <property name="sqlSessionTemplateBeanName" value="sqlSession"/>
+    </bean>
+
     <!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -80,6 +86,7 @@
     <!-- 使用annotation定义事务 -->
     <tx:annotation-driven transaction-manager="transactionManager"
                           proxy-target-class="true" />
+
 
     <!--监控统计-->
     <bean id="stat-filter" class="com.alibaba.druid.filter.stat.StatFilter">
