@@ -7,17 +7,19 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 # 功能
 支持下列操作
 
-| 操作类型        | 交易方法         | 
-| ------------- |:-------------:| 
-|新增      |insert|
-| 修改     |update      |  
-| 新增或者修改 |insertOrUpdate    |  
-|删除 |delete    |  
-| 查询单个|SelectOne     |  
-| 查询列表 |SelectList      |  
-| 存储过程查询 |SelectProc     |  
+| 操作类型|交易方法|说明|
+| ------------- |:-------------:| -------------:|
+|新增|insert|可批量|
+|修改|update|可批量|
+|新增或者修改|insertOrUpdate|可批量|  
+|删除|delete|可批量|  
+|查询单个|SelectOne|  
+|查询列表|SelectList|支持分页，需要入参带分页标志参数|  
+|存储过程处理|SelectProc|支持分页，需要入带待分页标志参数|  
 
 # xml格式
+
+## 1.新增或者修改
 
 入参：
 ```xml
@@ -58,3 +60,123 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 </goku>
 
 ```
+## 2.查询列表
+
+入参：
+```xml
+<goku> 
+ <header> 
+    <user_id>22</user_id>  
+    <password>22</password>  
+    <tran_no>SelectList</tran_no>  
+    <bs_code>sysUserMapper</bs_code> 
+  </header>  
+  <body> 
+    <data> 
+      <id>fjx</id> 
+    </data> 
+  </body> 
+</goku>
+
+```
+
+出参：
+```xml
+<goku>
+  <body>
+    <data>
+      <Phone_/>
+      <company_id>E1C879F8-C493-D26A-699D-604DE42A2BE6-COMPANY</company_id>
+      <nickName>***</nickName>
+      <valid_>Y</valid_>
+      <groupId>90</groupId>
+      <companyName>***</companyName>
+      <password_>yYSu0BSux2I6VPBZHaB6hf1Ldi0=</password_>
+      <extuserid>****</extuserid>
+      <emailAddress>nbfujx@qq.com</emailAddress>
+      <mobilePhone>***</mobilePhone>
+      <favoriteFood>***</favoriteFood>
+      <recycled_>N</recycled_>
+      <modifiedDate>2017-08-04 09:07:26.0</modifiedDate>
+      <description_/>
+      <country_/>
+      <id>fjx</id>
+      <area_/>
+      <type_>normal</type_>
+      <createDate>2013-07-03 14:53:30.0</createDate>
+      <male_>1</male_>
+    </data>
+    <ret_info>成功</ret_info>
+    <ret_code>0</ret_code>
+  </body>
+</goku>
+```
+
+# 分页查询
+
+入参：
+```xml
+<goku> 
+  <header> 
+    <user_id>fjx</user_id>  
+    <password>1</password>  
+    <tran_no>SelectList</tran_no>  
+    <bs_code>sysUserMapper</bs_code>  
+     <!--是否分页-->
+    <is_pagination>Y</is_pagination>  
+     <!--当前页-->
+    <page_index>1</page_index>  
+     <!--单页数-->
+    <page_limit>10</page_limit> 
+  </header>  
+  <body> 
+    <data> 
+      <id>fjx</id> 
+    </data> 
+  </body> 
+</goku>
+```
+出参：
+```xml
+<goku>
+  <body>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <data>
+	...
+    </data>
+    <ret_code>0</ret_code>
+    <ret_info>成功!</ret_info>
+	  <!--当前页-->
+    <page_index>1</page_index>
+    <!--数据总数-->
+    <page_count>649</page_count>
+  </body>
+</goku>
+```
+
