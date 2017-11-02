@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.goku.webservice.controller.BusController;
+import com.goku.webservice.model.gokuTranlogWithBLOBs;
 import com.goku.webservice.service.checkService;
 import com.goku.webservice.service.commService;
 import com.goku.webservice.util.PageUtil;
@@ -18,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.jws.WebService;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +39,15 @@ public class BusControllerImpl implements BusController {
 
     @Override
     public String process(String para) {
+
+        gokuTranlogWithBLOBs gokutranlog=new  gokuTranlogWithBLOBs();
+        gokutranlog.setRequestxml(para.getBytes());
+        gokutranlog.setCreatedate(new Date());
         try {
             RequestInfo requestInfo= RequestUtil.Serialize(XmlUtil.XMLToMap(para));
+            gokutranlog.setUserid(requestInfo.getHeader().getUser_id());
+            gokutranlog.setBscode(requestInfo.getHeader().getBs_code());
+            gokutranlog.setTranno(requestInfo.getHeader().getTran_no());
             ResponseInfo responseInfo=new ResponseInfo();
             Body body=new Body();
             String docheckString=checkservice.checkheader(requestInfo.getHeader());  //权限验证
@@ -90,6 +99,14 @@ public class BusControllerImpl implements BusController {
             Map<String,Object> Response=new HashMap<>();
             Response.put("goku",responseInfo);
             String responseStr=XmlUtil.MapToXML(Response);
+            gokutranlog.setResponsexml(responseStr.getBytes());
+            gokutranlog.setSuccessflag("1");
+            try {
+                checkservice.SaveTranlog(gokutranlog);
+            }catch (Exception ex)
+            {
+
+            }
             return responseStr;
         } catch (Exception e) {
             ResponseInfo responseInfo=new ResponseInfo();
@@ -100,6 +117,14 @@ public class BusControllerImpl implements BusController {
             Map<String,Object> Response=new HashMap<>();
             Response.put("goku",responseInfo);
             String responseStr=XmlUtil.MapToXML(Response);
+            gokutranlog.setResponsexml(responseStr.getBytes());
+            gokutranlog.setSuccessflag("0");
+            try {
+                checkservice.SaveTranlog(gokutranlog);
+            }catch (Exception eex)
+            {
+
+            }
             return responseStr;
         }
 

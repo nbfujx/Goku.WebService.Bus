@@ -2,6 +2,7 @@ package com.goku.webservice.service.impl;
 
 import com.goku.webservice.mapper.checkMapper;
 import com.goku.webservice.model.gokuAuthority;
+import com.goku.webservice.model.gokuTranlogWithBLOBs;
 import com.goku.webservice.model.gokuUserinfo;
 import com.goku.webservice.service.checkService;
 import com.goku.webservice.util.RequestUtil.Header;
@@ -42,6 +43,11 @@ public class checkServiceImpl implements checkService {
         {
             return "无相关操作类型!";
         }
+    }
+
+    @Override
+    public int SaveTranlog(gokuTranlogWithBLOBs gokutranlog) {
+        return checkmapper.SaveTranlog(gokutranlog);
     }
 
 

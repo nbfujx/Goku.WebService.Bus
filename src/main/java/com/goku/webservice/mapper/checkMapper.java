@@ -7,6 +7,7 @@ import com.goku.webservice.model.gokuUserinfo;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -21,12 +22,13 @@ public interface checkMapper {
      @Select("select * from goku_authority where userid=#{userid,jdbcType=VARCHAR} and bscode=#{bscode,jdbcType=VARCHAR}  and tranno=#{tranno,jdbcType=VARCHAR}")
      gokuAuthority GetAuthority(@Param("userid") String userid,@Param("bscode") String bscode,@Param("tranno") String tranno);
 
-     @Insert(" insert into goku_tranlog (userid, bscode, tranno, " +
-             "      startdate, enddate, requestxml, " +
+     @Insert(" insert into goku_tranlog (uuid,userid, bscode, tranno, " +
+             "      createdate, successflag,requestxml, " +
              "      responsexml)" +
-             "    values (#{userid,jdbcType=VARCHAR}, #{bscode,jdbcType=VARCHAR}, #{tranno,jdbcType=VARCHAR}, " +
-             "      #{startdate,jdbcType=TIMESTAMP}, #{enddate,jdbcType=TIMESTAMP}, #{requestxml,jdbcType=LONGVARBINARY}, " +
+             "    values (#{uuid,jdbcType=VARCHAR},#{userid,jdbcType=VARCHAR}, #{bscode,jdbcType=VARCHAR}, #{tranno,jdbcType=VARCHAR}, " +
+             "      #{createdate,jdbcType=TIMESTAMP}, #{successflag,jdbcType=VARCHAR},#{requestxml,jdbcType=LONGVARBINARY}, " +
              "      #{responsexml,jdbcType=LONGVARBINARY})")
+     @SelectKey(statement=" SELECT replace(uuid(),'-','')  AS uuid",keyProperty="uuid", resultType=String.class, before=true)
      int SaveTranlog(gokuTranlogWithBLOBs gokutranlog);
 
 }
