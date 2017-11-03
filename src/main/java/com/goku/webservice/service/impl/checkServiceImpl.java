@@ -3,6 +3,7 @@ package com.goku.webservice.service.impl;
 import com.goku.webservice.datahelper.DataSource;
 import com.goku.webservice.mapper.checkMapper;
 import com.goku.webservice.model.gokuAuthority;
+import com.goku.webservice.model.gokuBussiness;
 import com.goku.webservice.model.gokuTranlogWithBLOBs;
 import com.goku.webservice.model.gokuUserinfo;
 import com.goku.webservice.service.checkService;
@@ -26,7 +27,7 @@ public class checkServiceImpl implements checkService {
         String password = header.getPassword();
         String tran_no = header.getTran_no();
         String bs_code = header.getBs_code();
-        if (checkbs_code(tran_no)) {
+        if (checkbs_code(bs_code,tran_no)) {
             gokuUserinfo gokuuserinfo = checkmapper.GetUserinfo(user_id);
             if (gokuuserinfo == null) {
                 return user_id + "用户不存在!";
@@ -53,26 +54,15 @@ public class checkServiceImpl implements checkService {
     }
 
 
-    private Boolean checkbs_code(String tran_no)
+    private Boolean checkbs_code(String bs_code,String tran_no)
     {
-        switch (tran_no) {
-            case "SelectOne":
-                return true;
-            case "SelectList":
-                return true;
-            case "SelectProc":
-                return true;
-            case "insert":
-                return true;
-            case "update":
-                return true;
-            case "delete":
-                return true;
-            case "insertOrUpdate":
-                return true;
-            default:
-                return false;
-
+        gokuBussiness gokubus=checkmapper.GetBussiness(bs_code,tran_no);
+        if(gokubus==null)
+        {
+            return false;
+        }else
+        {
+            return true;
         }
     }
 }

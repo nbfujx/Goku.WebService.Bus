@@ -3,12 +3,10 @@ package test.com.goku.webservice.util;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import com.goku.webservice.util.XmlUtil;
+import com.goku.webservice.util.VelocityEngineUtil;
 import org.junit.Test;
 
 import java.util.HashMap;
-import java.util.Map;
-
-import static org.junit.Assert.*;
 
 /**
  * Created by nbfujx on 2017-10-26.
@@ -35,6 +33,15 @@ public class XmlUtilTest  {
         XmlUtil.MapToXML( XmlUtil.XMLToMap(xml));
         System.out.print( JSONUtils.toJSONString(XmlUtil.XMLToMap(xml)));
         System.out.print( XmlUtil.MapToXML( XmlUtil.XMLToMap(xml)));
+    }
+
+    @Test
+    public void test2() throws Exception {
+        String sql="#set( $pattern = $username + '%' )  SELECT * FROM goku_userinfo WHERE username LIKE '$pattern'";
+        HashMap<String,String> para=new HashMap<String, String>();
+        para.put("username","fjx");
+        VelocityEngineUtil.Velocitytemplate2String(sql,para);
+        System.out.print( VelocityEngineUtil.Velocitytemplate2String(sql,para));
     }
 
 }

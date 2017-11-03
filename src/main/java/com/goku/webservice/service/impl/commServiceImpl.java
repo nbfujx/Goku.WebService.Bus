@@ -25,37 +25,33 @@ public class commServiceImpl implements commService {
 
     @Transactional
     public  Object doProess(String BsCode,String Operation, Object Para) {
-        String method=BsCode.trim()+"."+Operation.trim();
-       // try {
-            switch (Operation) {
-                case "SelectOne":
-                    return SelectOne(method, Para);
-                case "SelectList":
-                    return SelectList(method, Para);
-                case "SelectProc":
-                    return SelectProc(method, Para);
-                case "insert":
-                     insert(method, Para);
-                     return 1;
-                case "update":
-                     update(method, Para);
-                     return 1;
-                case "delete":
-                     delete(method, Para);
-                     return 1;
-                case "insertOrUpdate":
-                    insertOrUpdate(BsCode, Para);
-                    return 1;
-                default:
-                    return "error";
-
-            }
-       // }catch (Exception e)
-       // {
-           // return e.getMessage();
-       // }
+        StringBuilder method = new StringBuilder();
+        method.append(BsCode.trim());
+        method.append(".");
+        method.append(Operation.trim());
+        switch (Operation) {
+            case "SelectOne":
+                return SelectOne(method.toString(), Para);
+            case "SelectList":
+                return SelectList(method.toString(), Para);
+            case "SelectProc":
+                return SelectProc(method.toString(), Para);
+            case "insert":
+                 insert(method.toString(), Para);
+                 return 1;
+            case "update":
+                 update(method.toString(), Para);
+                 return 1;
+            case "delete":
+                 delete(method.toString(), Para);
+                 return 1;
+            case "insertOrUpdate":
+                insertOrUpdate(BsCode, Para);
+                return 1;
+            default:
+                return "error";
+        }
     }
-
 
     public Map<String, String> SelectOne(String method,Object Para) {
         return sqlSession.selectOne(method, Para);

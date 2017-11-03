@@ -1,10 +1,7 @@
 package com.goku.webservice.mapper;
 
 
-import com.goku.webservice.model.gokuAuthority;
-import com.goku.webservice.model.gokuIpList;
-import com.goku.webservice.model.gokuTranlogWithBLOBs;
-import com.goku.webservice.model.gokuUserinfo;
+import com.goku.webservice.model.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -34,5 +31,8 @@ public interface checkMapper {
 
      @Select("select * from goku_iplist where ipaddress=#{ipaddress,jdbcType=VARCHAR}")
      gokuIpList GetIpLimt(@Param("ipaddress") String ipaddress);
+
+     @Select("select * from goku_bussiness where  bscode=#{bscode,jdbcType=VARCHAR}  and tranno=#{tranno,jdbcType=VARCHAR} and useflag='Y'")
+     gokuBussiness GetBussiness(@Param("bscode") String bscode, @Param("tranno") String tranno);
 
 }

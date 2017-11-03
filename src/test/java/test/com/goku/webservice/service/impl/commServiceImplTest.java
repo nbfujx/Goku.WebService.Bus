@@ -4,6 +4,9 @@ package test.com.goku.webservice.service.impl;
 import com.alibaba.druid.support.json.JSONUtils;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.goku.webservice.mapper.checkMapper;
+import com.goku.webservice.model.gokuBussiness;
+import com.goku.webservice.service.VelocityService;
 import com.goku.webservice.service.commService;
 import com.goku.webservice.util.ResponseUtil.Body;
 import com.goku.webservice.util.ResponseUtil.ResponseInfo;
@@ -30,6 +33,12 @@ public class commServiceImplTest {
 
     @Autowired
     private commService commservice;
+
+    @Autowired
+    private VelocityService velocityService;
+
+    @Autowired
+    private checkMapper checkmapper;
 
     @Test
     public void selectOne() throws Exception {
@@ -75,6 +84,17 @@ public class commServiceImplTest {
         System.out.print( JSONUtils.toJSONString(  responseInfo.getBody().getRet_info()));
         System.out.print( JSONUtils.toJSONString(  responseInfo.getBody().getData()));
         System.out.print(  XmlUtil.MapToXML( Response));
+    }
+
+    @Test
+    public void doProess4() throws Exception {
+        String bsCode="test";
+        String Operation="SelectOne";
+        Map<String, String> para=new HashMap<String, String>();
+        para.put("username","fjx");
+        gokuBussiness gokubus=checkmapper.GetBussiness(bsCode,Operation);
+        Object userinfo=velocityService.doProess(bsCode,Operation,gokubus.getSqltemplate(),para);
+        System.out.print(userinfo);
     }
 
 }
