@@ -37,16 +37,13 @@ public class commServiceImpl implements commService {
             case "SelectProc":
                 return SelectProc(method.toString(), Para);
             case "insert":
-                 insert(method.toString(), Para);
-                 return 1;
+                insert(method.toString(), Para);
+                return 1;
             case "update":
-                 update(method.toString(), Para);
-                 return 1;
+                update(method.toString(), Para);
+                return 1;
             case "delete":
-                 delete(method.toString(), Para);
-                 return 1;
-            case "insertOrUpdate":
-                insertOrUpdate(BsCode, Para);
+                delete(method.toString(), Para);
                 return 1;
             default:
                 return "error";
@@ -76,7 +73,7 @@ public class commServiceImpl implements commService {
         }
         else
         {
-             sqlSession.insert(method, Para);
+            sqlSession.insert(method, Para);
         }
     }
 
@@ -108,31 +105,6 @@ public class commServiceImpl implements commService {
         else
         {
             sqlSession.delete(method, Para);
-        }
-    }
-
-    private void insertOrUpdate(String BsCode, Object Para) {
-        if(Para.getClass().getName().equals("java.util.ArrayList"))
-        {
-            ArrayList list = (ArrayList) Para;
-            for (int i = 0; i < list.size(); i++) {
-                HashMap hm = (HashMap) list.get(i);
-                int count=sqlSession.selectOne(BsCode.trim()+".SelectById", hm);
-                if(count>0) {
-                    sqlSession.update(BsCode.trim()+".update", hm);
-                }else{
-                    sqlSession.insert(BsCode.trim()+".insert", hm);
-                }
-            }
-        }
-        else
-        {
-            int count=sqlSession.selectOne(BsCode.trim()+".SelectById", Para);
-            if(count>0) {
-                sqlSession.update(BsCode.trim()+".update", Para);
-            }else{
-                sqlSession.insert(BsCode.trim()+".insert", Para);
-            }
         }
     }
 

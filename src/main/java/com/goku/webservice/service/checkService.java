@@ -1,5 +1,7 @@
 package com.goku.webservice.service;
 
+import com.goku.webservice.datahelper.DataSource;
+import com.goku.webservice.model.gokuBussiness;
 import com.goku.webservice.model.gokuTranlogWithBLOBs;
 import com.goku.webservice.util.RequestUtil.Header;
 
@@ -9,4 +11,5 @@ import com.goku.webservice.util.RequestUtil.Header;
 public interface checkService {
     String checkheader(Header header);
     int SaveTranlog(gokuTranlogWithBLOBs gokutranlog);
+    gokuBussiness GetBussiness(String bs_code, String tran_no);
 }

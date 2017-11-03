@@ -5,7 +5,9 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.goku.webservice.controller.BusController;
+import com.goku.webservice.model.gokuBussiness;
 import com.goku.webservice.model.gokuTranlogWithBLOBs;
+import com.goku.webservice.service.VelocityService;
 import com.goku.webservice.service.checkService;
 import com.goku.webservice.service.commService;
 import com.goku.webservice.util.PageUtil;
@@ -33,6 +35,9 @@ import java.util.Map;
 public class BusControllerImpl implements BusController {
 
     @Autowired
+    private VelocityService velocityService;
+
+    @Autowired
     private commService commservice;
 
     @Autowired
@@ -57,12 +62,19 @@ public class BusControllerImpl implements BusController {
                 body.setRet_info(docheckString);
                 responseInfo.setBody(body);
             }else{
+               gokuBussiness gokubus=checkservice.GetBussiness(requestInfo.getHeader().getBs_code(),requestInfo.getHeader().getTran_no());
                if("Y".equals(requestInfo.getHeader().getIs_pagination())){
                    if(requestInfo.getHeader().getPage_index()!=null&&requestInfo.getHeader().getPage_limit()!=null) {
                        int startnum = (Integer.parseInt(requestInfo.getHeader().getPage_index())-1)*Integer.parseInt(requestInfo.getHeader().getPage_limit())+1;
                        int endnum = Integer.parseInt(requestInfo.getHeader().getPage_index())*Integer.parseInt(requestInfo.getHeader().getPage_limit());
                        PageHelper.startPage(startnum, endnum);
-                       Object info=commservice.doProess(requestInfo.getHeader().getBs_code(),requestInfo.getHeader().getTran_no(),requestInfo.getBody().getData());
+                       Object info=null;
+                        if("N".equals(gokubus.getIssqlmapper())) {
+                            info=commservice.doProess(requestInfo.getHeader().getBs_code(), requestInfo.getHeader().getTran_no(), requestInfo.getBody().getData());
+                        }else
+                        {
+                            info=velocityService.doProess(requestInfo.getHeader().getBs_code(), requestInfo.getHeader().getTran_no(),gokubus.getSqltemplate(), requestInfo.getBody().getData());
+                        }
                        PageInfo page = new PageInfo((List) info);
                        body.setRet_code("0");
                        body.setRet_info("成功!");
@@ -77,7 +89,13 @@ public class BusControllerImpl implements BusController {
                        responseInfo.setBody(body);
                    }
                }else {
-                   Object info=commservice.doProess(requestInfo.getHeader().getBs_code(),requestInfo.getHeader().getTran_no(),requestInfo.getBody().getData());
+                   Object info=null;
+                   if("N".equals(gokubus.getIssqlmapper())) {
+                       info=commservice.doProess(requestInfo.getHeader().getBs_code(), requestInfo.getHeader().getTran_no(), requestInfo.getBody().getData());
+                   }else
+                   {
+                       info=velocityService.doProess(requestInfo.getHeader().getBs_code(), requestInfo.getHeader().getTran_no(),gokubus.getSqltemplate(), requestInfo.getBody().getData());
+                   }
                    if(info!=null) {
                        if (info.getClass().getName().equals("java.lang.Integer")) {
                            body.setRet_code("0");

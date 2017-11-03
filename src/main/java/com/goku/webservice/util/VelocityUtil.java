@@ -12,7 +12,7 @@ import java.util.Set;
 /**
  * Created by nbfujx on 2017-11-03.
  */
-public class VelocityEngineUtil {
+public class VelocityUtil {
 
     public static String Velocitytemplate2String(String sqltemplate,HashMap<String,String> Para)
     {

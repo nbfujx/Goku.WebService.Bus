@@ -3,7 +3,7 @@ package test.com.goku.webservice.util;
 
 import com.alibaba.druid.support.json.JSONUtils;
 import com.goku.webservice.util.XmlUtil;
-import com.goku.webservice.util.VelocityEngineUtil;
+import com.goku.webservice.util.VelocityUtil;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -40,8 +40,8 @@ public class XmlUtilTest  {
         String sql="#set( $pattern = $username + '%' )  SELECT * FROM goku_userinfo WHERE username LIKE '$pattern'";
         HashMap<String,String> para=new HashMap<String, String>();
         para.put("username","fjx");
-        VelocityEngineUtil.Velocitytemplate2String(sql,para);
-        System.out.print( VelocityEngineUtil.Velocitytemplate2String(sql,para));
+        VelocityUtil.Velocitytemplate2String(sql,para);
+        System.out.print( VelocityUtil.Velocitytemplate2String(sql,para));
     }
 
 }

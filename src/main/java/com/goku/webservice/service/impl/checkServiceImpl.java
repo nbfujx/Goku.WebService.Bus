@@ -27,16 +27,22 @@ public class checkServiceImpl implements checkService {
         String password = header.getPassword();
         String tran_no = header.getTran_no();
         String bs_code = header.getBs_code();
-        if (checkbs_code(bs_code,tran_no)) {
+        gokuBussiness gokubus=GetBussiness(bs_code,tran_no);
+        if (gokubus!=null) {
             gokuUserinfo gokuuserinfo = checkmapper.GetUserinfo(user_id);
             if (gokuuserinfo == null) {
                 return user_id + "用户不存在!";
             } else {
-                if (!gokuuserinfo.getPassword().equals(password)) {
+                if (!password.equals(gokuuserinfo.getPassword())) {
                     return user_id + "用户密码不正确!";
                 } else {
                     gokuAuthority gokuauthority = checkmapper.GetAuthority(gokuuserinfo.getUserid(),bs_code,tran_no);
-                    if (!"Y".equals(gokuauthority.getAuth())) {
+                    if(gokuauthority!=null) {
+                        if (!"Y".equals(gokuauthority.getAuth())) {
+                            return user_id + "无操作权限!";
+                        }
+                    }else
+                    {
                         return user_id + "无操作权限!";
                     }
                 }
@@ -53,16 +59,10 @@ public class checkServiceImpl implements checkService {
         return checkmapper.SaveTranlog(gokutranlog);
     }
 
-
-    private Boolean checkbs_code(String bs_code,String tran_no)
+    @Override
+    public gokuBussiness GetBussiness(String bs_code,String tran_no)
     {
         gokuBussiness gokubus=checkmapper.GetBussiness(bs_code,tran_no);
-        if(gokubus==null)
-        {
-            return false;
-        }else
-        {
-            return true;
-        }
+        return gokubus;
     }
 }

@@ -1,7 +1,7 @@
 package test.com.goku.webservice.mapper;
 
 import com.goku.webservice.mapper.VelocityMapper;
-import com.goku.webservice.util.VelocityEngineUtil;
+import com.goku.webservice.util.VelocityUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ public class velocityMapperTest {
         String sql="#set( $pattern = $username + '%' )  SELECT * FROM goku_userinfo WHERE username LIKE '$pattern'";
         HashMap<String,String> para=new HashMap<String, String>();
         para.put("username","fjx");
-        String sqlp=VelocityEngineUtil.Velocitytemplate2String(sql,para);
+        String sqlp= VelocityUtil.Velocitytemplate2String(sql,para);
         velocitymapper.SelectOne(sqlp);
     }
 
