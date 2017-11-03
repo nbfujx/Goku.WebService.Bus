@@ -14,6 +14,7 @@ import com.goku.webservice.util.RequestUtil.RequestUtil;
 import com.goku.webservice.util.ResponseUtil.Body;
 import com.goku.webservice.util.ResponseUtil.ResponseInfo;
 import com.goku.webservice.util.XmlUtil;
+import org.apache.cxf.feature.Features;
 import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
