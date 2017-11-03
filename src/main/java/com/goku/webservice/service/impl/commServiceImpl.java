@@ -1,5 +1,6 @@
 package com.goku.webservice.service.impl;
 
+import com.goku.webservice.datahelper.DataSource;
 import com.goku.webservice.service.commService;
 import com.sun.org.apache.bcel.internal.generic.Select;
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +17,7 @@ import java.util.Map;
  * Created by nbfujx on 2017-10-26.
  */
 @Service
+@DataSource("business")
 public class commServiceImpl implements commService {
 
     @Autowired
@@ -53,8 +55,6 @@ public class commServiceImpl implements commService {
            // return e.getMessage();
        // }
     }
-
-
 
 
     public Map<String, String> SelectOne(String method,Object Para) {

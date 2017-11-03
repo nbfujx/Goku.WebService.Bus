@@ -1,5 +1,6 @@
 package com.goku.webservice.service.impl;
 
+import com.goku.webservice.datahelper.DataSource;
 import com.goku.webservice.mapper.checkMapper;
 import com.goku.webservice.model.gokuAuthority;
 import com.goku.webservice.model.gokuTranlogWithBLOBs;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
  * Created by nbfujx on 2017-10-31.
  */
 @Service
+@DataSource("tran")
 public class checkServiceImpl implements checkService {
 
     @Autowired
