@@ -25,10 +25,12 @@ public class commServiceImpl implements commService {
 
     @Transactional
     public  Object doProess(String BsCode,String Operation, Object Para) {
+
         StringBuilder method = new StringBuilder();
         method.append(BsCode.trim());
         method.append(".");
         method.append(Operation.trim());
+
         switch (Operation) {
             case "SelectOne":
                 return SelectOne(method.toString(), Para);

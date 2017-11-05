@@ -24,15 +24,15 @@ public class velocityMapperTest {
     public void selectOne() throws Exception {
         String sql="update sys_user  " +
                 "#mset() " +
-                "  #if(!$name)  name=$name,#end " +
+                "  #if($username)  name=$username,#end " +
                 "#end  " +
                 "WHERE id = $id";
         HashMap<String,String> para=new HashMap<String, String>();
         para.put("username","fjx");
         para.put("id","fjx");
         String sqlp= VelocityUtil.Velocitytemplate2String(sql,para);
-        //velocitymapper.SelectOne(sqlp);
-        System.out.print(sqlp);
+        velocitymapper.SelectOne(sqlp);
+        //System.out.print(sqlp);
     }
 
 }

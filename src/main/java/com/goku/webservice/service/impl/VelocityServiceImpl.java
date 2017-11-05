@@ -26,6 +26,7 @@ public class VelocityServiceImpl implements VelocityService {
 
     @Transactional
     public Object doProess(String BsCode, String Operation,String sqltemplate, Object Para) {
+
         switch (Operation) {
             case "SelectOne":
                 return SelectOne(sqltemplate, Para);

@@ -60,8 +60,7 @@ public class checkServiceImpl implements checkService {
     }
 
     @Override
-    public gokuBussiness GetBussiness(String bs_code,String tran_no)
-    {
+    public gokuBussiness GetBussiness(String bs_code,String tran_no){
         gokuBussiness gokubus=checkmapper.GetBussiness(bs_code,tran_no);
         return gokubus;
     }

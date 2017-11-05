@@ -4,7 +4,11 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.mybatis.scripting.velocity.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,14 +20,16 @@ import java.util.Set;
  */
 public class VelocityUtil {
 
-    public static String Velocitytemplate2String(String sqltemplate,HashMap<String,String> Para)
-    {
+
+
+    public static String Velocitytemplate2String(String sqltemplate, HashMap<String, String> Para) {
+        //加载velocity配置
         Properties p = new Properties();
-        p.setProperty("userdirective", TrimDirective.class.getName()
-                +","+InDirective.class.getName()
-                +","+RepeatDirective.class.getName()
-                +","+SetDirective.class.getName()
-                +","+WhereDirective.class.getName());
+        try {
+            p.load(VelocityUtil.class.getClassLoader().getResourceAsStream("velocity.properties"));
+        } catch (IOException e) {
+
+        }
         VelocityEngine ve = new VelocityEngine();
         ve.init(p);
         String content =sqltemplate;
