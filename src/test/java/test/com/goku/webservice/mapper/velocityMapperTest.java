@@ -14,7 +14,7 @@ import java.util.HashMap;
  * Created by nbfujx on 2017-11-03.
  */
 @RunWith(SpringJUnit4ClassRunner.class)  //使用junit4进行测试
-@ContextConfiguration({"classpath:spring-base.xml"})
+@ContextConfiguration({"classpath:spring-base.xml" })
 public class velocityMapperTest {
 
     @Autowired
@@ -22,11 +22,17 @@ public class velocityMapperTest {
 
     @Test
     public void selectOne() throws Exception {
-        String sql="#set( $pattern = $username + '%' )  SELECT * FROM goku_userinfo WHERE username LIKE '$pattern'";
+        String sql="update sys_user  " +
+                "#mset() " +
+                "  #if(!$name)  name=$name,#end " +
+                "#end  " +
+                "WHERE id = $id";
         HashMap<String,String> para=new HashMap<String, String>();
         para.put("username","fjx");
+        para.put("id","fjx");
         String sqlp= VelocityUtil.Velocitytemplate2String(sql,para);
-        velocitymapper.SelectOne(sqlp);
+        //velocitymapper.SelectOne(sqlp);
+        System.out.print(sqlp);
     }
 
 }

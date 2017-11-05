@@ -3,10 +3,12 @@ package com.goku.webservice.util;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
+import org.mybatis.scripting.velocity.*;
 
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -16,8 +18,14 @@ public class VelocityUtil {
 
     public static String Velocitytemplate2String(String sqltemplate,HashMap<String,String> Para)
     {
+        Properties p = new Properties();
+        p.setProperty("userdirective", TrimDirective.class.getName()
+                +","+InDirective.class.getName()
+                +","+RepeatDirective.class.getName()
+                +","+SetDirective.class.getName()
+                +","+WhereDirective.class.getName());
         VelocityEngine ve = new VelocityEngine();
-        ve.init();
+        ve.init(p);
         String content =sqltemplate;
         VelocityContext context = new VelocityContext();
         Set set = Para.keySet();
