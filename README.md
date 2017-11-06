@@ -14,6 +14,7 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 
 #### 1.支持日志记录，黑白名单控制</br>
 #### 2.支持数据库配置velocity sql查询语句(支持mybatis.velocity指令）</br>
+#### 3.基础配置获取增加mybatis缓存机制</br>
 
 3.支持下列业务操作
 
