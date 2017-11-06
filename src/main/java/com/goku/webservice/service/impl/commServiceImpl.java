@@ -26,26 +26,24 @@ public class commServiceImpl implements commService {
     @Transactional
     public  Object doProess(String BsCode,String Operation, Object Para) {
 
-        StringBuilder method = new StringBuilder();
-        method.append(BsCode.trim());
-        method.append(".");
-        method.append(Operation.trim());
-
+        StringBuilder methodsb = new StringBuilder();
+        methodsb.append(BsCode.trim()).append(".").append(Operation.trim());
+        String method=methodsb.toString();
         switch (Operation) {
             case "SelectOne":
-                return SelectOne(method.toString(), Para);
+                return SelectOne(method, Para);
             case "SelectList":
-                return SelectList(method.toString(), Para);
+                return SelectList(method, Para);
             case "SelectProc":
-                return SelectProc(method.toString(), Para);
+                return SelectProc(method, Para);
             case "insert":
-                insert(method.toString(), Para);
+                insert(method, Para);
                 return 1;
             case "update":
-                update(method.toString(), Para);
+                update(method, Para);
                 return 1;
             case "delete":
-                delete(method.toString(), Para);
+                delete(method, Para);
                 return 1;
             default:
                 return "error";
