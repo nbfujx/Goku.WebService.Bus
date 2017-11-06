@@ -2,16 +2,14 @@ package com.goku.webservice.mapper;
 
 
 import com.goku.webservice.model.*;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 /**
  * Created by nbfujx on 2017-11-01.
  */
 @Repository
+@CacheNamespace(implementation = org.mybatis.caches.redis.RedisCache.class)
 public interface checkMapper {
 
      @Select("select * from goku_userinfo where usercode=#{usercode,jdbcType=VARCHAR} and useflag='Y'")

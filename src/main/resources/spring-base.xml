@@ -14,12 +14,7 @@
 
     <context:component-scan base-package="com.goku.webservice.service"/>
 
-    <!-- 引入配置文件 -->
-    <bean id="propertyConfigurer"
-          class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:mybatis.properties" />
-    </bean>
-
+    <context:property-placeholder location="classpath:mybatis.properties" ignore-unresolvable="true" />
     <!--druid的配置-->
     <bean id="trandataSource" class="com.alibaba.druid.pool.DruidDataSource"
           init-method="init" destroy-method="close">
