@@ -1,6 +1,12 @@
 # Goku.WebService.Bus
 基于SpringBoot + Spring +  Apache CXF +Mybatis 开发SOAP的 WebService 服务
 
+# 备注</br>
+| **版本** |  **说明**| 
+| ------   |:------:|
+| 1.0.0版本| |
+| 2.0.0版本|springboot启动|
+
 # 原理
 Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebService接口服务
 
