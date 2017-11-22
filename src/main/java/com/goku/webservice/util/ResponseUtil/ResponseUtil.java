@@ -10,7 +10,7 @@ public class ResponseUtil {
 
     public static ResponseInfo Serialize(HashMap<String,Object> info)
     {
-        ResponseInfo responseInfo=new  ResponseInfo();
+        ResponseInfo responseInfo=new ResponseInfo();
         Body body=new Body();
         if(info.containsKey("goku")) {
             HashMap<String, Object> response = (HashMap<String, Object>) info.get("goku");

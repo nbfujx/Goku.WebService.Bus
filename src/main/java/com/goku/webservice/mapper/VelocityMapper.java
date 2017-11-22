@@ -1,18 +1,17 @@
 package com.goku.webservice.mapper;
 
-import com.goku.webservice.datahelper.DataSource;
 import org.apache.ibatis.annotations.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by nbfujx on 2017-11-03.
  */
-@Repository
+@Mapper
+@Component
 public interface VelocityMapper {
 
     @Select("${sqlstr}")

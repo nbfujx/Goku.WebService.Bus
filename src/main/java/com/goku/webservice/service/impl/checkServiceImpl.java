@@ -1,6 +1,7 @@
 package com.goku.webservice.service.impl;
 
-import com.goku.webservice.datahelper.DataSource;
+
+import com.goku.webservice.config.druid.DataSource;
 import com.goku.webservice.mapper.checkMapper;
 import com.goku.webservice.model.gokuAuthority;
 import com.goku.webservice.model.gokuBussiness;
@@ -60,7 +61,7 @@ public class checkServiceImpl implements checkService {
     }
 
     @Override
-    public gokuBussiness GetBussiness(String bs_code,String tran_no){
+    public gokuBussiness GetBussiness(String bs_code, String tran_no){
         gokuBussiness gokubus=checkmapper.GetBussiness(bs_code,tran_no);
         return gokubus;
     }

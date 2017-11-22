@@ -1,9 +1,5 @@
 package com.goku.webservice.Interceptor;
 
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.goku.webservice.mapper.checkMapper;
 import com.goku.webservice.model.gokuIpList;
 import org.apache.cxf.interceptor.Fault;
@@ -12,6 +8,9 @@ import org.apache.cxf.phase.AbstractPhaseInterceptor;
 import org.apache.cxf.phase.Phase;
 import org.apache.cxf.transport.http.AbstractHTTPDestination;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created by nbfujx on 2017-11-03.

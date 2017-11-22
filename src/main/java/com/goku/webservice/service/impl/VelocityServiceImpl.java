@@ -1,6 +1,7 @@
 package com.goku.webservice.service.impl;
 
-import com.goku.webservice.datahelper.DataSource;
+
+import com.goku.webservice.config.druid.DataSource;
 import com.goku.webservice.mapper.VelocityMapper;
 import com.goku.webservice.service.VelocityService;
 import com.goku.webservice.util.VelocityUtil;

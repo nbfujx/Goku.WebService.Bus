@@ -2,8 +2,8 @@ package test.com.goku.webservice.util;
 
 
 import com.alibaba.druid.support.json.JSONUtils;
-import com.goku.webservice.util.XmlUtil;
 import com.goku.webservice.util.VelocityUtil;
+import com.goku.webservice.util.XmlUtil;
 import org.junit.Test;
 
 import java.util.HashMap;

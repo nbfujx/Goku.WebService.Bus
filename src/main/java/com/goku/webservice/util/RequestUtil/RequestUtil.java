@@ -1,7 +1,5 @@
 package com.goku.webservice.util.RequestUtil;
 
-import com.goku.webservice.util.ResponseUtil.*;
-
 import java.util.HashMap;
 
 /**

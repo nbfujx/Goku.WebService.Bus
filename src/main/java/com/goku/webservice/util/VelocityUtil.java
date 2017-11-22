@@ -1,13 +1,9 @@
 package com.goku.webservice.util;
 
-import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.mybatis.scripting.velocity.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashMap;

@@ -2,33 +2,29 @@ package test.com.goku.webservice.service.impl;
 
 
 import com.alibaba.druid.support.json.JSONUtils;
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
+import com.goku.webservice.WebserviceApplication;
 import com.goku.webservice.mapper.checkMapper;
 import com.goku.webservice.model.gokuBussiness;
 import com.goku.webservice.service.VelocityService;
 import com.goku.webservice.service.commService;
 import com.goku.webservice.util.ResponseUtil.Body;
 import com.goku.webservice.util.ResponseUtil.ResponseInfo;
-import com.goku.webservice.util.ResponseUtil.ResponseUtil;
 import com.goku.webservice.util.XmlUtil;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
  * Created by nbfujx on 2017-10-26.
  */
 @RunWith(SpringJUnit4ClassRunner.class)  //使用junit4进行测试
-@ContextConfiguration({"classpath:spring-base.xml"})
+@SpringBootTest(classes = WebserviceApplication.class)
 public class commServiceImplTest {
 
     @Autowired
@@ -67,7 +63,7 @@ public class commServiceImplTest {
         Map<String, String> para=new HashMap<String, String>();
         para.put("male_","1");
         Object users=commservice.doProess(bsCode,Operation,para);
-        ResponseInfo responseInfo=new  ResponseInfo();
+        ResponseInfo responseInfo=new ResponseInfo();
         Body body=new Body();
         if(users.getClass().getName().equals("java.lang.String")){
             body.setRet_code("1");
@@ -88,10 +84,10 @@ public class commServiceImplTest {
 
     @Test
     public void doProess4() throws Exception {
-        String bsCode="test";
+        String bsCode="tmember";
         String Operation="SelectOne";
         Map<String, String> para=new HashMap<String, String>();
-        para.put("username","fjx");
+        para.put("name","fjx");
         gokuBussiness gokubus=checkmapper.GetBussiness(bsCode,Operation);
         Object userinfo=velocityService.doProess(bsCode,Operation,gokubus.getSqltemplate(),para);
         System.out.print(userinfo);

@@ -1,6 +1,5 @@
 package com.goku.webservice.controller.impl;
 
-import com.alibaba.druid.support.json.JSONUtils;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -16,8 +15,6 @@ import com.goku.webservice.util.RequestUtil.RequestUtil;
 import com.goku.webservice.util.ResponseUtil.Body;
 import com.goku.webservice.util.ResponseUtil.ResponseInfo;
 import com.goku.webservice.util.XmlUtil;
-import org.apache.cxf.feature.Features;
-import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,8 +27,10 @@ import java.util.Map;
 /**
  * Created by nbfujx on 2017-10-26.
  */
-
-@WebService(endpointInterface = "com.goku.webservice.controller.BusController")
+@Component
+@WebService(serviceName = "BusService"
+        ,targetNamespace="http://controller.webservice.goku.com/"
+        ,endpointInterface = "com.goku.webservice.controller.BusController")
 public class BusControllerImpl implements BusController {
 
     @Autowired
@@ -46,7 +45,7 @@ public class BusControllerImpl implements BusController {
     @Override
     public String process(String para) {
 
-        gokuTranlogWithBLOBs gokutranlog=new  gokuTranlogWithBLOBs();
+        gokuTranlogWithBLOBs gokutranlog=new gokuTranlogWithBLOBs();
         gokutranlog.setRequestxml(para.getBytes());
         gokutranlog.setCreatedate(new Date());
         try {
@@ -117,7 +116,7 @@ public class BusControllerImpl implements BusController {
              }
             Map<String,Object> Response=new HashMap<>();
             Response.put("goku",responseInfo);
-            String responseStr=XmlUtil.MapToXML(Response);
+            String responseStr= XmlUtil.MapToXML(Response);
             gokutranlog.setResponsexml(responseStr.getBytes());
             gokutranlog.setSuccessflag("1");
             try {
@@ -135,7 +134,7 @@ public class BusControllerImpl implements BusController {
             responseInfo.setBody(body);
             Map<String,Object> Response=new HashMap<>();
             Response.put("goku",responseInfo);
-            String responseStr=XmlUtil.MapToXML(Response);
+            String responseStr= XmlUtil.MapToXML(Response);
             gokutranlog.setResponsexml(responseStr.getBytes());
             gokutranlog.setSuccessflag("0");
             try {

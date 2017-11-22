@@ -3,12 +3,14 @@ package com.goku.webservice.mapper;
 
 import com.goku.webservice.model.*;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 /**
  * Created by nbfujx on 2017-11-01.
  */
-@Repository
+@Mapper
+@Component
 @CacheNamespace(implementation = org.mybatis.caches.redis.RedisCache.class)
 public interface checkMapper {
 
@@ -16,7 +18,7 @@ public interface checkMapper {
      gokuUserinfo GetUserinfo(@Param("usercode") String usercode);
 
      @Select("select * from goku_authority where userid=#{userid,jdbcType=VARCHAR} and bscode=#{bscode,jdbcType=VARCHAR}  and tranno=#{tranno,jdbcType=VARCHAR}")
-     gokuAuthority GetAuthority(@Param("userid") String userid,@Param("bscode") String bscode,@Param("tranno") String tranno);
+     gokuAuthority GetAuthority(@Param("userid") String userid, @Param("bscode") String bscode, @Param("tranno") String tranno);
 
      @Insert(" insert into goku_tranlog (uuid,userid, bscode, tranno, " +
              "      createdate, successflag,requestxml, " +
