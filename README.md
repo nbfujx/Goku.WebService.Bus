@@ -25,6 +25,7 @@ Mybatis基于动态代理实现Mapper接口，实现快速开发SOAP的WebServic
 |查询单个|SelectOne|  
 |查询列表|SelectList|支持分页，需要入参带分页标志参数|  
 |存储过程处理|SelectProc|支持分页，需要入带待分页标志参数|  
+|新增或修改|insertOrupdate|待完善|  
 
 ##### 5.待完善
 
