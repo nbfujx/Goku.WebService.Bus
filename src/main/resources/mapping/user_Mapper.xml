@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="tmember">
+<mapper namespace="user_">
     <select id="SelectOne" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-        SELECT * FROM tmember WHERE name = #{name,jdbcType=VARCHAR}
+        SELECT * FROM user_ WHERE nickname = #{username,jdbcType=VARCHAR}
     </select>
 </mapper>
